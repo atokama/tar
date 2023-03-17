@@ -348,7 +348,9 @@ handle_file_selection_option (int key, const char *arg)
       break;
 
     case EXCLUDE_VCS_OPTION:
-      add_exclude_array (vcs_file_table, 0);
+        /* When extracting, to exclude whole VCS directory, match file path by regex.
+         * False-match is a problem. Excluded files like .gitarra */
+      add_exclude_array (vcs_file_table, EXCLUDE_REGEX);
       break;
 
     case EXCLUDE_VCS_IGNORES_OPTION:

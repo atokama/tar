@@ -1,0 +1,26 @@
+
+AT_SETUP([extract --exclude-vcs])
+AT_KEYWORDS([extract --exclude-vcs])
+
+AT_TAR_CHECK([
+mkdir -p gitrepo/.git
+touch gitrepo/.git/HEAD
+touch gitrepo/.gitignore
+touch gitrepo/main.c
+touch gitrepo/.gitarra
+
+tar -cf gitrepo.tar gitrepo
+rm -r gitrepo
+tar -xf gitrepo.tar --exclude-vcs
+
+find gitrepo | sort
+],
+[0],
+[gitrepo
+gitrepo/.gitarra
+gitrepo/main.c
+],
+[])
+
+AT_CLEANUP
+
